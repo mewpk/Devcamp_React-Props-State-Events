@@ -1,0 +1,16 @@
+.PictureCard{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 100px;
+    justify-content: center;
+}
+.grid-item{
+    
+    text-align: center;
+    align-items: center;
+}
+.grid-item img{
+    height: 200px;
+    width :200px;
+}
