@@ -42,7 +42,10 @@ export default function PictureCard() {
     }
    
   ]
-  const list = Card.map(x=><div className='grid-item'><img src={x.imgSrc} id={x.id}></img> <h3>createBy : {x.createBy}</h3><p>Like : {x.likeCount}</p>
+  const onChangeLike = (e)=>{
+    setlike = 1
+  }
+  const list = Card.map(x=><div className='grid-item'><img src={x.imgSrc} id={x.id}></img> <h3>createBy : {x.createBy}</h3><p>Like : {x.likeCount}</p><button onClick={()=>{onChangeLike()}} style={{backgroundColor : "blue",color: "white",border : 0 ,height : 30}}> Like !!</button>
   <p>Comment : {x.commentCount}</p></div>)
 
   return (
