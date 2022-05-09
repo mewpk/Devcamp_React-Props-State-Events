@@ -45,64 +45,85 @@ export default function PictureCard() {
     setPosts(newPosts);
   };
 
+  const handleCommentPost = (event, postId) => {
+    if (event.key === "Enter") {
+      alert("ขอบคุณครับ");
+      const newPosts = posts.map((post) => {
+        if (post.id === postId) {
+          post.commentCount += 1;
+        }
+        return post;
+      });
+
+      // update stat
+      setPosts(newPosts);
+    }
+  };
+
   return (
     <div className="Container">
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        backgroundColor: "#fafafa",
-        color: "#000",
-        fontSize: "1.5rem",
-        fontWeight: "bold",
-        fontFamily: "sans-serif",
-        textAlign: "center",
-        padding: "0",
-        margin: "0",
-      }}
-    >
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          style={{
-            border: "1px solid #000",
-            width: "200px",
-            margin: "10px",
-          }}
-        >
-          <img src={post.imgSrc} alt="post" />
-          <div>
-            <h3>{post.createBy}</h3>
-            <p>
-              <span>{post.likeCount}</span>
-              {/* <span>{post.commentCount}</span> */}
-            </p>
-          </div>
-
-          <button
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          backgroundColor: "#fafafa",
+          color: "#000",
+          fontSize: "1.5rem",
+          fontWeight: "bold",
+          fontFamily: "sans-serif",
+          textAlign: "center",
+          padding: "0",
+          margin: "0",
+        }}
+      >
+        {posts.map((post) => (
+          <div
+            key={post.id}
             style={{
-              backgroundColor: "#000",
-              color: "#fff",
-              padding: "0.5rem",
-              border: "none",
-              fontSize: "1rem",
-              fontWeight: "bold",
-              fontFamily: "sans-serif",
-              cursor: "pointer",
-              margin: "0.5rem",
-              borderRadius: "5px",
-            }}
-            onClick={() => {
-              handleLikePost(post.id);
+              border: "1px solid #000",
+              width: "200px",
+              margin: "10px",
             }}
           >
-            Like
-          </button>
-        </div>
-      ))}
-    </div>
+            <img src={post.imgSrc} alt="post" />
+            <div>
+              <h3>{post.createBy}</h3>
+              <p>
+                <span>Like : {post.likeCount}</span>
+                <p>Comment : {post.commentCount}</p>
+              </p>
+            </div>
+
+            <button
+              style={{
+                backgroundColor: "#000",
+                color: "#fff",
+                padding: "0.5rem",
+                border: "none",
+                fontSize: "1rem",
+                fontWeight: "bold",
+                fontFamily: "sans-serif",
+                cursor: "pointer",
+                margin: "0.5rem",
+                borderRadius: "5px",
+              }}
+              onClick={() => {
+                handleLikePost(post.id);
+              }}
+            >
+              Like
+            </button>
+            <input
+              type="text"
+              onKeyPress={(event) => {
+                handleCommentPost(event,post.id);
+              }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
