@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from "react"
+
+
 
 function App() {
+  const [ToDoList,setToDolist] = useState(
+    [{
+      Content : "String",
+      Date : Date()
+    }]
+  )
+    
+    const remove = (target)=>{
+      let data = [...ToDoList]
+      // console.log(target)
+      data.splice(target,1)
+      // console.log(data)
+      setToDolist(data)
+    }
+    const handle = (e)=>{
+      if(e.key === "Enter"){
+        if(e.target.value !== ''){
+          // alert("Hello")
+          const newData = e.target.value
+          let data = [...ToDoList]
+          data.push({Content : newData , Date: Date()})
+          // const data = ToDoList.map()
+          // data[data.length].Content = e.target.value
+        //   console.log(data.length)
+        console.log(data)
+        setToDolist(data)
+        }
+        
+      }
+    }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {ToDoList.map((x,i)=>(<div key={x.Date}><h1>{x.Content}</h1>
+    <h1>{x.Date}</h1>
+    <button onClick={()=>{
+      remove(i)
+    }}>Remove</button></div>
+    )
+      
+    )}
+    <input onKeyPress={(e)=>{
+      handle(e)
+    }} type="text" />
+    </>
   );
+
 }
 
 export default App;
